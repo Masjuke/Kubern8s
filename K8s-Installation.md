@@ -60,5 +60,6 @@ Do the same to all vm to get same dependencies required for running kubernetes c
         --token                            #Will generate token automaticly from master and use by member to join cluster
 
 
+4. Flannel Network
 
 
