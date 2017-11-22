@@ -98,21 +98,23 @@ After we deployed containers/application through deployment/Replicasets/Replicat
 
 A Kubernetes Service is an abstraction which defines a logical set of Pods and a policy by which to access them - sometimes called a micro-service. The set of Pods targeted by a Service is (usually) determined by a Label Selector (see below for why you might want a Service without a selector).
 
-
-
 ---
 
 
 `Config Maps`
 
-
+It's a place to store configuration of `ConfigMap` data as a key value store. for example when you created volume through configmap, each data it will represent as an individual file volume. 
 
 
 `Persistent Volume Claims`
 
+`PVC` is similar to pod and it's main purpose is to provide storage requested by user
+
 `Secrets`
 
+Every user that have access to kubernetes can have their own secret with different privileges and path, for example dev team and admin have own level access of secret to manage container/application on kubernetes.
 
+Convert your secret data to a base-64 representation. Create a Secret. Create a Pod that has access to the secret data through a Volume. Create a Pod that has access to the secret data through environment variables.
 
 
 
