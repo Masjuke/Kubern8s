@@ -51,10 +51,7 @@ Sets of description rule inside kubernetes for granting user access, easy way is
 
 It's a dynamic provisioning volume for containers/pod based on demand for critical path of running stateful container
 
-
-
 ---
-
 
 `Daemonsets`
 
@@ -68,9 +65,12 @@ Deploying application or container into node or pods, to do this it need API ver
 
 `Jobs`
 
-Job on kubernetes is 
+Jobs on kubernetes is a supervisor for pods carrying out batch process, process that run on a certain time of completion
+and given scheduled. this can be done through cron job like crontab
 
 `Pods`
+
+
 
 `Replicaset`
 
