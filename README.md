@@ -6,7 +6,7 @@
     * Architecture
     * Component Explanation
     * Installation
-    * Comparison running K8s Local & GCP
+    * Pick the right solution
     * Running K8s
     
       - Create User/Separate User based on namespace
