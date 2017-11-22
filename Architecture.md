@@ -84,9 +84,13 @@ Replica sets is created automaticly when we deploy container through kind:deploy
 
 `Stateful Set`
 
+To manage the deployment and scaling a sets of pods. A Pod represents a set of running containers on your cluster., and provides guarantees about the ordering and uniqueness of these Pods.
+
 ---
 
 `Ingress`
+
+Ingress controller is to manage services of application/containers to be accessible from external, ingress controller is deploy on master act as daemon and deploy on kubernetes as a pod to watch APISERVER/ingress endpoint for update to ingress resources.
 
 `Services`
 
