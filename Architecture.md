@@ -1,5 +1,5 @@
 
-### Dashboard Component
+### Component of K8s dashboard 
 
 ### Cluster
 
@@ -66,15 +66,20 @@ Deploying application or container into node or pods, to do this it need API ver
 `Jobs`
 
 Jobs on kubernetes is a supervisor for pods carrying out batch process, process that run on a certain time of completion
-and given scheduled. this can be done through cron job like crontab
+and given scheduled. this can be done through cron job like crontab.
 
 `Pods`
 
+Kubernetes pods is a group or collection of container/application on node cluster that can be deploy together or single pod, basicly pods is building block of k8s the smallest and simplest kubernetes object that we create of deploy.
 
+`Replica Sets`
 
-`Replicaset`
+Replica sets is created automaticly when we deploy container through kind:deployment, `RS` function is to manage all pods using labels that match with the selector, it does not distinguish between pods created or deleted and pods that another person or process created or deleted.
+
 
 `ReplicationController`
+
+
 
 `Stateful Set`
 
