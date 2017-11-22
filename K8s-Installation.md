@@ -59,4 +59,3 @@ Above command to advertise master IP address as master of the cluster and set PO
 
 
 
-
