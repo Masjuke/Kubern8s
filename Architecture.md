@@ -94,9 +94,19 @@ Ingress controller is to manage services of application/containers to be accessi
 
 `Services`
 
+After we deployed containers/application through deployment/Replicasets/ReplicationController, the container need to be accessible and therefore run `kubectl expose` to manage services of a container inside pods and set `port` number and `type of port`.
+
+A Kubernetes Service is an abstraction which defines a logical set of Pods and a policy by which to access them - sometimes called a micro-service. The set of Pods targeted by a Service is (usually) determined by a Label Selector (see below for why you might want a Service without a selector).
+
+
+
 ---
 
+
 `Config Maps`
+
+
+
 
 `Persistent Volume Claims`
 
