@@ -41,11 +41,20 @@ Node is part of cluster and hold pod on it, each running pod and other services 
 
 `Persistent Volume`
 
+Persistent volume is a piece of storage volume that used cluster resources same as node used by pod and consume cluster resource, persistent volume `PV` is assign for user by administrator to a specific pod to store data. we can also uses external storage volume instead using from kubernetes  volume especially for storing database.
+
 `Roles`
+
+Sets of description rule inside kubernetes for granting user access, easy way is a collection of permission rules for example permission on pod or permission for pod. this is defined in RBAC using 2 objects between user and resources
 
 `StorageClasses`
 
+It's a dynamic provisioning volume for containers/pod based on demand for critical path of running stateful container
+
+
+
 ---
+
 
 `Daemonsets`
 
