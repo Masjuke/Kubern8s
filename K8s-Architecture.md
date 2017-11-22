@@ -1,8 +1,28 @@
 
-<img width="600" alt="screen shot 2017-11-22 at 2 23 37 pm" src="https://user-images.githubusercontent.com/32785359/33114814-2b050576-cf91-11e7-8095-371c0e576d1c.png">
+
+### K8s Architecture
 
 
+`Kubernetes stands with several components/item to run container orchestration` 
 
+* Master
+  - Controller Manager
+  - Kubectl
+  - Scheduler
+  - Etcd
+  - API
+  
+* Node
+  - Kubelet
+  - Proxy
+  - Pods
+  
+`Please continue read on below link :`
+  
+https://github.com/eBay/Kubernetes/blob/master/docs/design/architecture.md
+  
+  
+   
 
 
 
