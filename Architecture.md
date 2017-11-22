@@ -1,5 +1,5 @@
 
-### Component of K8s dashboard 
+### Understanding of K8s Dashboard-Component 
 
 ### Cluster
 
@@ -74,11 +74,12 @@ Kubernetes pods is a group or collection of container/application on node cluste
 
 `Replica Sets`
 
-Replica sets is created automaticly when we deploy container through kind:deployment, `RS` function is to manage all pods using labels that match with the selector, it does not distinguish between pods created or deleted and pods that another person or process created or deleted.
+Replica sets is created automaticly when we deploy container through kind:deployment the purpose is as a backend of depoyment, `RS` function is to manage all pods using labels that match with the selector, it does not distinguish between pods created or deleted and pods that another person or process created or deleted.
 
 
 `ReplicationController`
 
+`Replication Controller` is a structure that enables you to easily create multiple pods, then make sure that that number of pods always exists. If a pod does crash, the Replication Controller replaces it. Replication Controllers also provide other benefits, such as the ability to scale the number of pods, and to update or delete multiple pods with a single command. You can create a Replication Controller with an imperative command, or declaratively, from a file.
 
 
 `Stateful Set`
