@@ -4,9 +4,9 @@
 
     * K8s overview and why it's worth to use
     * Architecture
-    * Component Explanation
+    * K8s-Dashboard-Component
+    * K8s_Solution
     * Installation
-    * Pick the right solution
     * Running K8s
     
       - Create User/Separate User based on namespace
