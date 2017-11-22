@@ -2,12 +2,12 @@
 ## Kubern8s
 
 
-    * K8s overview and why it's worth to use
-    * Architecture
+    * K8s-Overview
+    * K8s-Architecture
     * K8s-Dashboard-Component
-    * K8s_Solution
-    * Installation
-    * Running K8s
+    * K8s-Solution
+    * K8s-Installation
+    * Running-K8s
     
       - Create User/Separate User based on namespace
       - Run app from deployment | from Kubectl or from Yaml
