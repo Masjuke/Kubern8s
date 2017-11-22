@@ -52,6 +52,10 @@ Do the same to all vm to get same dependencies required for running kubernetes c
 
 3. Kubeadm
 
+`$ sudo kubeadm init --api-advertise-addresses 192.168.5.10 --pod-network-cidr 10.244.0.0/16 --token[will show after advertise]`
+
+Above command to advertise master IP address as master of the cluster and set POD network that we add using flannel
+
 
 
 
