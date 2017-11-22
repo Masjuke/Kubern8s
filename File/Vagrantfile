@@ -8,21 +8,21 @@
        v.cpus = 4
      end
 
-     config.vm.define "master" do |node|
-       node.vm.hostname = ""
-       node.vm.network :private_network, ip: "192.168.5.10"
-       node.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*master.*/192\.168\.33\.10 master/' -i /etc/hosts"
+     config.vm.define "master" do |member|
+       member.vm.hostname = ""
+       member.vm.network :private_network, ip: "192.168.5.10"
+       member.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*master.*/192\.168\.33\.10 master/' -i /etc/hosts"
      end
 
-     config.vm.define "member" do |node|
-       node.vm.hostname = "member"
-       node.vm.network :private_network, ip: "192.168.5.20"
-       node.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*agent.*/192\.168\.33\.20 agent/' -i /etc/hosts"
+     config.vm.define "member" do |member|
+       member.vm.hostname = "member"
+       member.vm.network :private_network, ip: "192.168.5.20"
+       member.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*agent.*/192\.168\.33\.20 agent/' -i /etc/hosts"
      end
 
-     config.vm.define "member2" do |node|
-       node.vm.hostname = "member2"
-       node.vm.network :private_network, ip: "192.168.5.30"
-       node.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*agent2.*/192\.168\.33\.30 agent2/' -i /etc/hosts"
+     config.vm.define "member2" do |member|
+       member.vm.hostname = "member2"
+       member.vm.network :private_network, ip: "192.168.5.30"
+       member.vm.provision :shell, inline: "sed 's/127\.0\.0\.1.*agent2.*/192\.168\.33\.30 agent2/' -i /etc/hosts"
      end
  end
