@@ -74,7 +74,7 @@ wait for sometime and then run command from ubuntu master
 
         ubuntu@master:~$ kubectl get pods -o wide --all-namespaces
         NAMESPACE     NAME                                    READY     STATUS    RESTARTS   AGE       IP              NODE
-        default       kube-flannel-ds-b1p1z                   2/2       Running   0          1d        192.168.5.10   master
+        default       k8s-flannel-ds-b1p1z                    2/2       Running   0          1d        192.168.5.10   master
         kube-system   dummy-2088944543-nw04c                  1/1       Running   1          1d        192.168.5.10   master
         kube-system   etcd-master                             1/1       Running   1          1d        192.168.5.10   master
         kube-system   kube-apiserver-master                   1/1       Running   0          1d        192.168.5.10   master
@@ -85,6 +85,17 @@ wait for sometime and then run command from ubuntu master
         kube-system   kube-scheduler-master                   1/1       Running   1          1d        192.168.5.10   master
 
 
+5. Join to the cluster
 
+`kubeadm join --token=8c2350.f553************ 192.168.5.10`
+
+After a few minutes you should see that node is in ready state:
+
+
+        ubuntu@master:~$ kubectl get nodes
+        NAME      STATUS         AGE
+        member     Ready          1d
+        member2    Ready          1d
+        master     Ready,master   1d
 
 
