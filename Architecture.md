@@ -58,9 +58,17 @@ It's a dynamic provisioning volume for containers/pod based on demand for critic
 
 `Daemonsets`
 
+Daemonsets of kubernetes is a running service inside of kubernetes system for replicas a pod to run on specific node or on all nodes. it can create shared storage and logging for all pod also deploy monitoring agent on all nodes.
+
+You can manage replicas and scale pod through daemonset besides HPA or RC.
+
 `Deployment`
 
+Deploying application or container into node or pods, to do this it need API version kind:Deployment. there's few ways strategies to deploy application/container 
+
 `Jobs`
+
+Job on kubernetes is 
 
 `Pods`
 
