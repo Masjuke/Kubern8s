@@ -105,7 +105,10 @@ I have added K8s dashboard .yaml on file folder
 
 `$ sudo Kubectl create -f /kubernetes-dashboard.yaml`.  #run kubectl create from master
 
-Have take a look for k8s dashboard service by running kubectl describe services from master 
+
+Accessing Kubernetes dashboard or any other service from your localhost is easy. You just need to find NodePort of the service and to create forward rule on VirtualBox. Find NodePort for kubernetes-dashboard service:
+
+Have take a look for k8s dashboard service by running kubectl describe services from master
 
 ```shell
 ubuntu@master:~$ kubectl describe services kubernetes-dashboard -n kube-system
@@ -126,5 +129,49 @@ Events:                   <none>
 ```
 
 Our dashboard is running on port:443 >> TargetPort:8443 >> NodePort:30141 it means we can access kube dashboard from endpoint port 30141.
+
+But first let see where our kube master and DNS  is running 
+
+        $ kubectl cluster-info
+        Kubernetes master is running at https://192.168.5.10:6443
+        KubeDNS is running at https://192.168.5.10:6443/api/v1/namespaces/kube-system/services/kube-dns/proxy
+
+Let make sure is kube dashboard service is running so we can access dashboard
+
+        $ kubectl get services --namespace=kube-system
+        NAME                   TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
+        kube-dns               ClusterIP   10.96.0.10      <none>        53/UDP,53/TCP   14d
+        kubernetes-dashboard   NodePort    10.104.111.21   <none>        443:30141/TCP   14d
+        
+Ah, it's automaticly running because I already add services with .yaml when we run kubernetes-dashboard.yaml
+
+Run kubectl get pods to find kube dashboard 
+
+        $ kubectl get pods -n kube-system        
+        NAME                                   READY     STATUS    RESTARTS   AGE
+        etcd-master                            1/1       Running   15         14d
+        kube-apiserver-master                  1/1       Running   16         14d
+        kube-controller-manager-master         1/1       Running   16         14d
+        kube-dns-545bc4bfd4-ps55q              3/3       Running   39         14d
+        k8s-flannel-ds-jq742                   1/1       Running   14         14d
+        k8s-flannel-ds-sfpw5                   1/1       Running   14         14d
+        k8s-flannel-ds-zxpjj                   1/1       Running   14         14d
+        kube-proxy-4w2pq                       1/1       Running   13         14d
+        kube-proxy-6fc5f                       1/1       Running   15         14d
+        kube-proxy-bfqv7                       1/1       Running   13         14d
+        kube-scheduler-master                  1/1       Running   16         14d
+        kubernetes-dashboard-747c4f7cf-mdq6r   1/1       Running   11         14d
+        
+  Forward port from virtualbox to localhost agent  NodePort:30141 >> Host Port https://<IP Address>:8443
+        
+  At this point we should be able to access kubernetes dashboard through 
+  
+  `https://192.168.15.45:8443/#!/login`
+  
+  <img width="719" alt="screen shot 2017-11-23 at 12 10 06 pm" src="https://user-images.githubusercontent.com/32785359/33159653-874f0f5a-d047-11e7-968c-690210e0c9ff.png">
+  
+  
+  
+  
 
 
