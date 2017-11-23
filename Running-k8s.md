@@ -50,6 +50,70 @@ Admin user can access kube dashboard now then we need to go next step.
 https://github.com/kubernetes/dashboard/wiki/Access-control
 
 
+Besides above method we can also check admin token by issue kubectl command 
+
+```shell
+kubectl get secret -n kube-system
+NAME                                     TYPE                                  DATA      AGE
+attachdetach-controller-token-dtmr9      kubernetes.io/service-account-token   3         15d
+bootstrap-signer-token-qvhhc             kubernetes.io/service-account-token   3         15d
+certificate-controller-token-wmvkp       kubernetes.io/service-account-token   3         15d
+cronjob-controller-token-c7k78           kubernetes.io/service-account-token   3         15d
+daemon-set-controller-token-hvrzd        kubernetes.io/service-account-token   3         15d
+default-token-wnxn6                      kubernetes.io/service-account-token   3         15d
+deployment-controller-token-drkxh        kubernetes.io/service-account-token   3         15d
+disruption-controller-token-9zg5z        kubernetes.io/service-account-token   3         15d
+endpoint-controller-token-7rg8n          kubernetes.io/service-account-token   3         15d
+flannel-token-rmwbk                      kubernetes.io/service-account-token   3         15d
+generic-garbage-collector-token-fq5kx    kubernetes.io/service-account-token   3         15d
+heapster-token-hmjhc                     kubernetes.io/service-account-token   3         9d
+horizontal-pod-autoscaler-token-m5scm    kubernetes.io/service-account-token   3         15d
+job-controller-token-x2v2l               kubernetes.io/service-account-token   3         15d
+juke-token-9czw6                         kubernetes.io/service-account-token   3         14d
+kube-dns-token-6jm4h                     kubernetes.io/service-account-token   3         15d
+kube-proxy-token-6kbfk                   kubernetes.io/service-account-token   3         15d
+kubernetes-dashboard-certs               Opaque                                2         14d
+kubernetes-dashboard-key-holder          Opaque                                2         14d
+
+#--kubernetes-dashboard-token-qtbct         kubernetes.io/service-account-token   3         14d--#
+
+namespace-controller-token-6tjj4         kubernetes.io/service-account-token   3         15d
+node-controller-token-l8sp4              kubernetes.io/service-account-token   3         15d
+persistent-volume-binder-token-rxdqv     kubernetes.io/service-account-token   3         15d
+pod-garbage-collector-token-w2wtv        kubernetes.io/service-account-token   3         15d
+replicaset-controller-token-5ztk6        kubernetes.io/service-account-token   3         15d
+replication-controller-token-p9n6r       kubernetes.io/service-account-token   3         15d
+resourcequota-controller-token-997ws     kubernetes.io/service-account-token   3         15d
+service-account-controller-token-68z9p   kubernetes.io/service-account-token   3         15d
+service-controller-token-mh29d           kubernetes.io/service-account-token   3         15d
+statefulset-controller-token-4frb6       kubernetes.io/service-account-token   3         15d
+token-cleaner-token-pbb57                kubernetes.io/service-account-token   3         15d
+ttl-controller-token-cmmwh               kubernetes.io/service-account-token   3         15d
+```
+
+```shell
+kubectl describe secret kubernetes-dashboard-token-qtbct -n kube-system
+Name:         kubernetes-dashboard-token-qtbct
+Namespace:    kube-system
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name=kubernetes-dashboard
+              kubernetes.io/service-account.uid=cdc54b97-c476-11e7-a50f-0251174123cb
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:     1025 bytes
+namespace:  11 bytes
+token:      eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi1xdGJjdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImNkYzU0Yjk3LWM0NzYtMTFlNy1hNTBmLTAyNTExNzQxMjNjYiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.v1_QZ7Mcjl-hV14pBVAUXUMNCSbFKjnxlQK_3057fHtZP6WLvHh4aZ9P7yJob6l3CoUHyof2oJd_GJHuIyxu-bh4MRj6OOH4knB0zsNHtBwEIImdPU2QMlvUEw406a8s-7_4RNj3R50bPTDilJsnGzn2-PBhviTPZOBjz3d1jE8Y6B_9icFFse6A_9txV-yWxUPj-fZa-3lGhcSwXYVSyMIZFvHVwolgAKGsWlqz3cU1y5mFzwztNP_2eJMazu338GxILwp94Dxnn-D1bUSKlvjIb9zeOsBi4lmVwo_Xm2hOvXKiIdNpHog2C6PnqMuZ-Mp5nur0IdpibY2pCecmLQ
+```
+
+Using token `kubernetes-dashboard-token-qtbct` to have full access admin privileges by copying 
+
+`token:eyJhbGciOiJSUzI1*********.`      #Copy to kubernetes-dashboard login page
+
+
+
 ---
 
 * Container Deployment
