@@ -98,8 +98,17 @@ Wait for a minute and see that node is in ready state:
         member     Ready          1d
         member2    Ready          1d
         master     Ready,master   1d
+        
+        
+ To start using your cluster as reguler user we need to run this command
+ 
+`sudo cp /etc/kubernetes/admin.conf $HOME/`
 
-6. Add kubernetes dashboar service to our cluster
+`sudo chown $(id -u):$(id -g) $HOME/admin.conf`
+
+`export KUBECONFIG=$HOME/admin.conf`
+
+6. Add kubernetes dashboard service to our cluster
 
 I have added K8s dashboard .yaml on file folder
 
@@ -170,7 +179,9 @@ Run kubectl get pods to find kube dashboard
   
   <img width="719" alt="screen shot 2017-11-23 at 12 10 06 pm" src="https://user-images.githubusercontent.com/32785359/33159653-874f0f5a-d047-11e7-968c-690210e0c9ff.png">
   
-  
+ 
+ 
+ Installing kubernetes cluster with vagrant it's done, you can access kube dashboard using token, Yaml file or just can skip with admin privileges.
   
   
 
