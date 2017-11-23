@@ -1,4 +1,4 @@
-### Run kubernetes Dashboard 
+### Running-K8s 
 
 * User access
 
@@ -135,7 +135,7 @@ by issuing kubectl command or produce .yaml file
 
 
 
-
+Continue to separate .md file
 
 
 
