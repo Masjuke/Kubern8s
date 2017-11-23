@@ -17,7 +17,7 @@
   - Proxy
   - Pods
   
-`Please continue read on below link :`
+`Please continue read on below link to have a better understanding :`
   
 https://github.com/eBay/Kubernetes/blob/master/docs/design/architecture.md
   
