@@ -25,7 +25,7 @@
 
 12. Horizontal pod autoscaler need to set within yams file or manually from kubectl
 
-13. Only deployment and replication controller the a pod can be set to horizontal pod autoscale. Pod cannot directly set to horizontal autoscaler.
+13. Only deployment and replication controller the a pod can be set to horizontal pod autoscale. Pod cannot directly set to   horizontal autoscaler.
 
 14. Ingress purpose is to set service can be access outside world
 
