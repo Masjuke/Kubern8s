@@ -162,7 +162,7 @@ Run kubectl get pods to find kube dashboard
         kube-scheduler-master                  1/1       Running   16         14d
         kubernetes-dashboard-747c4f7cf-mdq6r   1/1       Running   11         14d
         
-  Forward port from virtualbox to localhost agent  NodePort:30141 >> Host Port https://<IP Address>:8443
+  Forward port from virtualbox to localhost member  NodePort:30141 >> Host Port https://<IP Address>:8443
         
   At this point we should be able to access kubernetes dashboard through 
   
