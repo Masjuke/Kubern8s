@@ -50,4 +50,9 @@ Admin user can access kube dashboard now then we need to go next step.
 https://github.com/kubernetes/dashboard/wiki/Access-control
 
 
+---
+
+* Container Deployment
+
+
 
