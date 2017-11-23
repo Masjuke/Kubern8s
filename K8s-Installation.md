@@ -80,7 +80,7 @@ wait for sometime and then run command from ubuntu master
         kube-system   kube-apiserver-master                   1/1       Running   0          1d        192.168.5.10   master
         kube-system   kube-controller-manager-master          1/1       Running   1          1d        192.168.5.10   master
         kube-system   kube-discovery-1769846148-x68wg         1/1       Running   1          1d        192.168.5.10   master
-        kube-system   kube-dns-2924299975-jf1h5               4/4       Running   0          1d        10.244.0.2     master
+        kube-system   kube-dns-2924299975-jf1h5               4/4       Running   0          1d        10.144.0.2     master
         kube-system   kube-proxy-hv751                        1/1       Running   1          1d        192.168.5.10   master
         kube-system   kube-scheduler-master                   1/1       Running   1          1d        192.168.5.10   master
 
