@@ -91,6 +91,10 @@ token-cleaner-token-pbb57                kubernetes.io/service-account-token   3
 ttl-controller-token-cmmwh               kubernetes.io/service-account-token   3         15d
 ```
 
+
+
+
+
 ```shell
 kubectl describe secret kubernetes-dashboard-token-qtbct -n kube-system
 Name:         kubernetes-dashboard-token-qtbct
@@ -105,10 +109,14 @@ Data
 ====
 ca.crt:     1025 bytes
 namespace:  11 bytes
-token:      eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZC10b2tlbi1xdGJjdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50Lm5hbWUiOiJrdWJlcm5ldGVzLWRhc2hib2FyZCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6ImNkYzU0Yjk3LWM0NzYtMTFlNy1hNTBmLTAyNTExNzQxMjNjYiIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDprdWJlLXN5c3RlbTprdWJlcm5ldGVzLWRhc2hib2FyZCJ9.v1_QZ7Mcjl-hV14pBVAUXUMNCSbFKjnxlQK_3057fHtZP6WLvHh4aZ9P7yJob6l3CoUHyof2oJd_GJHuIyxu-bh4MRj6OOH4knB0zsNHtBwEIImdPU2QMlvUEw406a8s-7_4RNj3R50bPTDilJsnGzn2-PBhviTPZOBjz3d1jE8Y6B_9icFFse6A_9txV-yWxUPj-fZa-3lGhcSwXYVSyMIZFvHVwolgAKGsWlqz3cU1y5mFzwztNP_2eJMazu338GxILwp94Dxnn-D1bUSKlvjIb9zeOsBi4lmVwo_Xm2hOvXKiIdNpHog2C6PnqMuZ-Mp5nur0IdpibY2pCecmLQ
+token:      eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm**********************************************
 ```
 
+
+
 Using token `kubernetes-dashboard-token-qtbct` to have full access admin privileges by copying 
+
+
 
 `token:eyJhbGciOiJSUzI1*********.`      #Copy to kubernetes-dashboard login page
 
@@ -117,6 +125,8 @@ Using token `kubernetes-dashboard-token-qtbct` to have full access admin privile
 ---
 
 * Container Deployment
+
+
 
 
 
