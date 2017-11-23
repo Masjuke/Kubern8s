@@ -16,7 +16,7 @@ Let's create a folder where we can store vagrantfile to download and setup VM we
 
 Make folder with sudo
 
-`$ sudo mkdir K8s`              #You can set different folder name
+`$ sudo mkdir K8s`              #create folder to put vagrantfile here
 
 `cd to k8s and vagrant init ubuntu/xenial64`
 
@@ -87,9 +87,10 @@ wait for sometime and then run command from ubuntu master
 
 5. Join to the cluster
 
-`kubeadm join --token=8c2350.f553************ 192.168.5.10`
+we can now run kubeadm from member & member2 to join cluster
+`$ kubeadm join --token=8c2350.f553************ 192.168.5.10`
 
-After a few minutes you should see that node is in ready state:
+Wait for a minute and see that node is in ready state:
 
 
         ubuntu@master:~$ kubectl get nodes
@@ -98,5 +99,32 @@ After a few minutes you should see that node is in ready state:
         member2    Ready          1d
         master     Ready,master   1d
 
+6. Add kubernetes dashboar service to our cluster
+
+I have added K8s dashboard .yaml on file folder
+
+`$ sudo Kubectl create -f /kubernetes-dashboard.yaml`.  #run kubectl create from master
+
+Have take a look for k8s dashboard service by running kubectl describe services from master 
+
+```shell
+ubuntu@master:~$ kubectl describe services kubernetes-dashboard -n kube-system
+Name:                     kubernetes-dashboard
+Namespace:                kube-system
+Labels:                   k8s-app=kubernetes-dashboard
+Annotations:              <none>
+Selector:                 k8s-app=kubernetes-dashboard
+Type:                     NodePort
+IP:                       10.104.111.21
+Port:                     <unset>  443/TCP
+TargetPort:               8443/TCP
+NodePort:                 <unset>  30141/TCP
+Endpoints:                10.144.1.125:8443
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+
+Our dashboard is running on port:443 >> TargetPort:8443 >> NodePort:30141 it means we can access kube dashboard from endpoint port 30141.
 
 
