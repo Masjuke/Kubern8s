@@ -41,5 +41,9 @@ I have already provided .yaml file for accessing kubernetes-dashboard on file fo
 
  <img width="719" alt="screen shot 2017-11-23 at 12 10 06 pm" src="https://user-images.githubusercontent.com/32785359/33159653-874f0f5a-d047-11e7-968c-690210e0c9ff.png">
   
-  
+ Since we already added admin access we do not need to add token or .yaml file manually to this kube dashboard page login so we can push skip button
+ 
+ <img width="1243" alt="screen shot 2017-11-23 at 4 47 48 pm" src="https://user-images.githubusercontent.com/32785359/33166792-20b08fc2-d06e-11e7-9176-4769ed745ef1.png">
+
+Admin user can access kube dashboard now then we need to go next step.
 
