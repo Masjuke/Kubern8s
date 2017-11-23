@@ -11,10 +11,25 @@
 
   - Access Kubernetes-dashboard
   - Run app from deployment | from Kubectl or from Yaml
+    - Sub 1
+    - Sub 2
+    - Sub 3
   - Run app from Replication Controller
+    - Sub 1
+    - Sub 2
+    - Sub 3
   - Run app from DaemonSets
+    - Sub 1
+    - Sub 2
+    - Sub 3
   - Expose Services
+    - Sub 1
+    - Sub 2
+    - Sub 3
   - Horizontal Pod Autoscaler/Autoscale
+    - Sub 1
+    - Sub 2
+    - Sub 3
   
 ---
   
