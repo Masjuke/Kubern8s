@@ -9,7 +9,7 @@
 * K8s-Installation
 * Running-K8s
 
-  - Create User/Separate User based on namespace
+  - Access Kubernetes-dashboard
   - Run app from deployment | from Kubectl or from Yaml
   - Get Pods/Deployment
   - Describe Pods/Deployment
