@@ -37,5 +37,9 @@ In this section we will use admin account instead adding another user, set diffe
       namespace: kube-system
     EOF
 
+I have already provided .yaml file for accessing kubernetes-dashboard on file folder with name `kube-admin.yaml`
 
+ <img width="719" alt="screen shot 2017-11-23 at 12 10 06 pm" src="https://user-images.githubusercontent.com/32785359/33159653-874f0f5a-d047-11e7-968c-690210e0c9ff.png">
+  
+  
 
