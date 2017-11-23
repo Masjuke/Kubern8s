@@ -109,7 +109,7 @@ Data
 ====
 ca.crt:     1025 bytes
 namespace:  11 bytes
-token:      eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm**********************************************
+token:      eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJrdWJlcm***************************************
 ```
 
 
@@ -124,7 +124,17 @@ Using token `kubernetes-dashboard-token-qtbct` to have full access admin privile
 
 ---
 
+
 * Container Deployment
+
+Deployment is a new type of kubernetes replication controller, but don't get me wrong Replication Controller is still part of kubernetes and shows on dashboard panel, we will run app through deployment method with `kubectl` CLI and see the result in kube dashboard.
+
+by issuing kubectl command or produce .yaml file 
+
+`$ kubectl run ...` or `$ kubectl create -f /Your/path/*.yaml`
+
+
+
 
 
 
