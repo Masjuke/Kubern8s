@@ -120,4 +120,11 @@ Create another container using `.yaml` file :
 
 
 
+`Note :`
+
+The preferred way to create a replicated application is to use a Deployment, which in turn uses a ReplicaSet but this is not horizontal pod autoscaling. Before the Deployment and ReplicaSet were added to Kubernetes, replicated applications were configured by using ReplicationController.
+
+
+
+
 
