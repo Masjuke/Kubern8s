@@ -10,10 +10,10 @@
 * Running-K8s
 
   - Access Kubernetes-dashboard
-  - Run app from deployment | from Kubectl or from Yaml
-    - Sub 1
-    - Sub 2
-    - Sub 3
+  - Deployment
+    - Deploy container using kube command 
+    - Deploy container through .yaml
+    - Update Container
   - Run app from Replication Controller
     - Sub 1
     - Sub 2
