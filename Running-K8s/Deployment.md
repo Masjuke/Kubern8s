@@ -215,9 +215,37 @@ Run kubectl command to show only second container that we just deploy using labe
     nginx-web-7446c487b7-fshll   1/1       Running   0          22m
     nginx-web-7446c487b7-nx45x   1/1       Running   0          22m
 
+Updating container using .yaml file 
+
+`$ sudo touch Deployment_update.yaml && sudo nano Deployment_update.yaml`
+
+```shell
+apiVersion: apps/v1beta1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: my-kube
+spec:
+  selector:
+    matchLabels:
+      app: nginx-2
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nginx-2
+    spec:
+      containers:
+      - name: nginx
+        image: asia.gcr.io/google_containers/nginx:1.8 # Update the version of nginx from 1.7.9 to 1.8
+        ports:
+        - containerPort: 80
+```        
+ 
+    ubuntu@master:~$ kubectl apply -f nginx-Deployment/Deployment_update.yaml
+    deployment "nginx-deployment" created
 
 
-To Be Continued
 
 `Note :`
 
