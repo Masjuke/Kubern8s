@@ -18,7 +18,7 @@ Make folder with sudo
 
 `$ sudo mkdir K8s`              #create folder to put vagrantfile here
 
-`cd to k8s and vagrant init ubuntu/xenial64`
+`cd to k8s and vagrant init ubuntu/xenial64` #Replace vagrantfile here with vagrantfile from file folder
 
 `$ sudo Vagrant up`
 
