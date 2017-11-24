@@ -14,7 +14,8 @@ spec:
         app: nginx-2
     spec:
       containers:
-      - name: nginx
+      - name: my-nginx
         image: asia.gcr.io/google_containers/nginx:1.8 # Update the version of nginx from 1.7.9 to 1.8
         ports:
         - containerPort: 80
+
