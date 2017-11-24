@@ -11,26 +11,11 @@
 
   - Access Kubernetes-dashboard
   - Deployment
-    - Deploy container using kube command 
-    - Deploy container through .yaml
-    - Update Container
-  - Run app from Replication Controller
-    - Sub 1
-    - Sub 2
-    - Sub 3
+  - Replication Controller
   - Run app from DaemonSets
-    - Sub 1
-    - Sub 2
-    - Sub 3
   - Expose Services
-    - Sub 1
-    - Sub 2
-    - Sub 3
   - Horizontal Pod Autoscaler/Autoscale
-    - Sub 1
-    - Sub 2
-    - Sub 3
-  
+      
 ---
   
 * Monitoring K8s 
