@@ -223,7 +223,7 @@ Updating container using .yaml file
 apiVersion: apps/v1beta1 # for versions before 1.8.0 use apps/v1beta1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx-web
   namespace: my-kube
 spec:
   selector:
