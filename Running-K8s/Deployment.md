@@ -118,6 +118,44 @@ Run container with 2 options, kubectl command and if you more like GUI interface
 
 Create another container using `.yaml` file :
 
+Please point to file folder with Deployment.yaml file 
+
+
+
+`$ sudo mkdir nginx-deployment && cd nginx-deployment`      #Create folder to put .yaml file
+
+`$ sudo touch Deployment.yaml && sudo nano Deployment.yaml`     #Create .yaml file and edit
+
+
+```shell
+apiVersion: apps/v1beta1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: nginx-web
+  namespace: my-kube
+spec:
+  selector:
+    matchLabels:
+      app: nginx-2
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      # unlike pod-nginx.yaml, the name is not included in the meta data as a unique name is
+      # generated from the deployment name
+      labels:
+        app: nginx-2
+    spec:
+      containers:
+      - name: my-nginx
+        image: asia.gcr.io/google_containers/nginx:1.7.9
+        ports:
+        - containerPort: 8081
+```
+
+
+
+
+
 
 
 `Note :`
