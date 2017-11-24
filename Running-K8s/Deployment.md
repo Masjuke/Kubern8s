@@ -109,11 +109,15 @@ As we see nginx is created and deployed, let's find out
 
 It describe that our nginx is running with 2 pods since we set replicas=2 but they have different back name. Our deployment tells we have 2 available nginx.
 
-Container run on my-kube namespace with labels added, port is 8080 as we set and image is pulling from asia google registry.
+Container run on my-kube namespace with labels is added, port 8080 as we set and image is pulling from asia google registry.
 You can pull from gcr.io[united state] also instead of asia.gcr.io[Asia region].
 
 Ok nginx container is running, Pods is ok, deploy status is done and replicas pods available is 2, this container still running in normal mode it won't consume high resource and we need to expose so it's accessible from outside.
 
-Running from kubectl command is fun but if you more like GUI interface you can use kube-dashboard. Create another container using `.yaml` file :
+Run container with 2 options, kubectl command and if you more like GUI interface you can use kube-dashboard. 
+
+Create another container using `.yaml` file :
+
+
 
 
