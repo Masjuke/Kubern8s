@@ -236,8 +236,8 @@ spec:
         app: nginx-2
     spec:
       containers:
-      - name: nginx
-        image: asia.gcr.io/google_containers/nginx:1.8 # Update the version of nginx from 1.7.9 to 1.8
+      - name: my-nginx
+        image: asia.gcr.io/google_containers/nginx:latest # Update the version of nginx from 1.7.9 to latest
         ports:
         - containerPort: 80
 ```        
@@ -245,10 +245,37 @@ spec:
     ubuntu@master:~$ kubectl apply -f nginx-Deployment/Deployment_update.yaml
     deployment "nginx-deployment" created
 
+```shell
+kubectl describe deployment nginx-web -n my-kube
+Name:                   nginx-web
+Namespace:              my-kube
+CreationTimestamp:      Fri, 24 Nov 2017 09:25:20 +0000
+Labels:                 app=nginx-2
+Annotations:            deployment.kubernetes.io/revision=2
+                        kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"apps/v1beta1","kind":"Deployment","metadata":{"annotations":{},"name":"nginx-web","namespace":"my-kube"},"spec":{"replicas":2,"selector"...
+Selector:               app=nginx-2
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx-2
+  Containers:
+   my-nginx:
+    Image:        asia.gcr.io/google_containers/nginx:latest
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+```
+
+Nginx-web is updated with port=80 previously=8081 and version is latest
+
+* Continue to next section run App from Replication Controller
 
 
 `Note :`
-
 The preferred way to create a replicated application is to use a Deployment, which in turn uses a ReplicaSet but this is not horizontal pod autoscaling. Before the Deployment and ReplicaSet were added to Kubernetes, replicated applications were configured by using ReplicationController.
 
 
