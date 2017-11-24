@@ -151,12 +151,73 @@ spec:
         ports:
         - containerPort: 8081
 ```
+.yaml file it's been deploy and scheduled by kube-scheduler, after few seconds run below command
+
+
+    ubuntu@master:~$ kubectl get pod -n my-kube
+    NAME                         READY     STATUS    RESTARTS   AGE
+    nginx-67f87b9bd4-nmp4s       1/1       Running   0          1h
+    nginx-67f87b9bd4-pmg66       1/1       Running   0          1h
+    nginx-web-7446c487b7-fshll   1/1       Running   0          18m
+    nginx-web-7446c487b7-nx45x   1/1       Running   0          18m
+
+Second container in namespace=my-kube apply through .yaml file  are added
+
+```shell
+kubectl get deployment -n my-kube
+NAME        DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+nginx       2         2         2            2           1h
+nginx-web   2         2         2            2           18m
+```
+
+
+`ubuntu@master:~$ kubectl describe deployment nginx-web -n my-kube`  #Describe container deployment
+```shell
+Name:                   nginx-web
+Namespace:              my-kube
+CreationTimestamp:      Fri, 24 Nov 2017 08:32:09 +0000
+Labels:                 app=nginx-2
+Annotations:            deployment.kubernetes.io/revision=1
+                        kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"apps/v1beta1","kind":"Deployment","metadata":{"annotations":{},"name":"nginx-web","namespace":"my-kube"},"spec":{"replicas":2,"selector"...
+Selector:               app=nginx-2
+Replicas:               2 desired | 2 updated | 2 total | 2 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=nginx-2
+  Containers:
+   my-nginx:
+    Image:        asia.gcr.io/google_containers/nginx:1.7.9
+    Port:         8081/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   nginx-web-7446c487b7 (2/2 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  20m   deployment-controller  Scaled up replica set nginx-web-7446c487b7 to 2
+```
+
+From above description of second nginx container, we give it a name nginx-web and set to my-kube namespace, port run on 8081 and with different version of nginx from previous container.
+
+Run kubectl command to show only second container that we just deploy using labels tag
+
+    ubuntu@master:~$ kubectl get pod -l app=nginx-2 -n my-kube
+    NAME                         READY     STATUS    RESTARTS   AGE
+    nginx-web-7446c487b7-fshll   1/1       Running   0          22m
+    nginx-web-7446c487b7-nx45x   1/1       Running   0          22m
 
 
 
-
-
-
+To Be Continued
 
 `Note :`
 
