@@ -21,3 +21,4 @@ spec:
         image: asia.gcr.io/google_containers/nginx:1.7.9
         ports:
         - containerPort: 8081
+
