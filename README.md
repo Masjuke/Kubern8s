@@ -22,5 +22,5 @@
   
 * Monitoring K8s
 * Additional-Notes
-* Command line Reference
+* Reference
 
