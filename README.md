@@ -15,11 +15,12 @@
   - Run app from DaemonSets
   - Expose Services
   - Horizontal Pod Autoscaler/Autoscale
+
+* Testing HPA
       
 ---
   
 * Monitoring K8s
-* Testing HPA
 * Additional-Notes
 * Command line Reference
 
