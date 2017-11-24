@@ -18,12 +18,8 @@
       
 ---
   
-* Monitoring K8s 
-  - Heapster
-  - InfluxDB, Grafana
-  - Sysdig
-
-* Testing resources PODS to see if HPA is working
+* Monitoring K8s
+* Testing HPA
 * Additional-Notes
 * Command line Reference
 
