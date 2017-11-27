@@ -71,4 +71,9 @@ Events:
  
  <img width="1433" alt="screen shot 2017-11-27 at 3 07 17 pm" src="https://user-images.githubusercontent.com/32785359/33256505-e4b36700-d384-11e7-81ff-aedba26d6d20.png">
  
- 
+As we can see nginx-web copies is added.
+You can specify how many pods should run concurrently by setting .spec.replicas to the number of pods you would like to have running concurrently. The number running at any time may be higher or lower, such as if the replicas were just increased or decreased, or if a pod is gracefully shutdown, and a replacement starts early.
+If you do not specify .spec.replicas, then it defaults to 1.
+
+
+
