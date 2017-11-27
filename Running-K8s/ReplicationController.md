@@ -10,3 +10,65 @@ Summary
 A simple case is to create one ReplicationController object to reliably run one instance of a Pod indefinitely. A more complex use case is to run several identical replicas of a replicated service, such as web servers.`
 
 
+Sample of replication controller runs of 4 copies nginx webserver
+
+`$ sudo touch Replication-Controller.yaml && sudo nano Replication-Controller.yaml`
+
+    apiVersion: apps/v1beta1
+    kind: ReplicationController
+    metadata:
+      name: nginx-web
+    spec:
+      replicas: 4
+      selector:
+        app: nginx
+      template:
+        metadata:
+          name: nginx-2
+          labels:
+            app: nginx-2
+        spec:
+          containers:
+          - name: my-nginx
+            image: nginx:latest
+            ports:
+            - containerPort: 80
+            
+  
+  `$ kubectl apply -f ./Replication-Controller.yaml -n my-kube` #Create nginx webserver replication controller
+  
+  Now check status our RC using below command
+  
+  `$ kubectl describe rc/nginx-web -n my-kube` #Check status of RC nginx-web
+  
+```shell  
+Name:         nginx-web
+Namespace:    my-kube
+Selector:     app=nginx
+Labels:       app=nginx
+Annotations:  kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"ReplicationController","metadata":{"annotations":{},"name":"nginx-web","namespace":"my-kube"},"spec":{"replicas":4,"selector...
+Replicas:     4 current / 4 desired
+Pods Status:  4 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=nginx
+  Containers:
+   my-nginx:
+    Image:        nginx:latest
+    Port:         80/TCP
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age   From                    Message
+  ----    ------            ----  ----                    -------
+  Normal  SuccessfulCreate  2m    replication-controller  Created pod: nginx-web-gxhsp
+  Normal  SuccessfulCreate  2m    replication-controller  Created pod: nginx-web-kcg74
+  Normal  SuccessfulCreate  2m    replication-controller  Created pod: nginx-web-xxhrh
+  Normal  SuccessfulCreate  2m    replication-controller  Created pod: nginx-web-kndj2
+  ```
+  
+ You can also check status using kubernetes-dashboard UI
+ 
+ <img width="1433" alt="screen shot 2017-11-27 at 3 07 17 pm" src="https://user-images.githubusercontent.com/32785359/33256505-e4b36700-d384-11e7-81ff-aedba26d6d20.png">
+ 
+ 
