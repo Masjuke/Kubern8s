@@ -155,3 +155,7 @@ I1128 03:40:09.636191       1 ipmasq.go:85] Adding iptables rule: ! -s 10.144.0.
 ```
 
 
+DaemonSets main job is to keep POD running if there's a error or deleted unexpectedly, POD are recreated by daemon.
+
+
+
