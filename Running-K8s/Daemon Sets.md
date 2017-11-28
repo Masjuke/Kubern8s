@@ -244,3 +244,27 @@ Allocated resources:
 Events:         <none>
 ```
 
+So `k8s-flannel-ds-sfpw5` is running on Node `Member`
+
+    $ kubectl delete pod kube-flannel-ds-sfpw5 -n kube-system
+    pod "kube-flannel-ds-sfpw5" deleted
+
+Status is deleted ... wait for a while for daemonsets recreating pod again
+
+    $ kubectl get pod -l app=flannel -n kube-system
+    NAME                    READY     STATUS    RESTARTS   AGE
+    k8s-flannel-ds-7cdxq   1/1       Running   0          3m
+    k8s-flannel-ds-jq742   1/1       Running   17         19d
+    k8s-flannel-ds-zxpjj   1/1       Running   17         19d
+    
+Bravoo... new pod is creating automaticly by daemonsets as we see with age 3minutes
+
+`$ kubectl describe node member`
+
+      Namespace             Name                             CPU Requests  CPU Limits  Memory Requests  Memory Limits
+      ---------            ----                            ------------  ----------  ---------------  ------------
+      kube-system          k8s-flannel-ds-7cdxq            0 (0%)        0 (0%)      0 (0%)           0 (0%)
+
+ New Pod  `k8s-flannel-ds-7cdxq` on `node Member` is created after we deleted Pod  `k8s-flannel-ds-sfpw5`
+ 
+ 
