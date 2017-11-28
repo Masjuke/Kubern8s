@@ -1,0 +1,20 @@
+apiVersion: autoscaling/v1
+    kind: HorizontalPodAutoscaler
+    metadata:
+      creationTimestamp: 2017-11-28T11:41:45Z
+      name: nginx-web
+      namespace: my-kube
+      resourceVersion: "375119"
+      selfLink: /apis/autoscaling/v1/namespaces/my-kube/horizontalpodautoscalers/nginx-web
+      uid: 1c765779-d431-11e7-9e20-0251174123cb
+    spec:
+      maxReplicas: 5
+      minReplicas: 4
+      scaleTargetRef:
+        apiVersion: extensions/v1beta1
+        kind: Deployment
+        name: nginx-web
+      targetCPUUtilizationPercentage: 80
+    status:
+      currentReplicas: 0
+      desiredReplicas: 0
