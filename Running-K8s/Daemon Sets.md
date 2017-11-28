@@ -41,57 +41,128 @@ Actually we did already run daemonsets for network plugin for arranging pods com
 
     $ kubectl get daemonsets -n kube-system
     NAME              DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR                   AGE
-    kube-flannel-ds   3         3         3         3            3           beta.kubernetes.io/arch=amd64   19d
+    k8s-flannel-ds    3         3         3         3            3           beta.kubernetes.io/arch=amd64   19d
     kube-proxy        3         3         3         3            3           <none>                          19d
 
 There's two daemon sets running on kube-system namespace.
 
-Let's have with different namespace which is `my-kube` with fluentd-elasticsearch container, pull from google container. we also limit cpu and memory resources.
 
-    apiVersion: apps/v1beta1 
-    kind: DaemonSet
+`$ kubectl get daemonset kube-flannel-ds -n kube-system -o=yaml` #Get .yaml file from existing daemon set
+
+```shell
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"extensions/v1beta1","kind":"DaemonSet","metadata":{"annotations":{},"labels":{"app":"flannel","tier":"node"},"name":"k8s-flannel-ds","namespace":"kube-system"},"spec":{"template":{"metadata":{"labels":{"app":"flannel","tier":"node"}},"spec":{"containers":[{"command":["/opt/bin/flanneld","--ip-masq","--kube-subnet-mgr"],"env":[{"name":"POD_NAME","valueFrom":{"fieldRef":{"fieldPath":"metadata.name"}}},{"name":"POD_NAMESPACE","valueFrom":{"fieldRef":{"fieldPath":"metadata.namespace"}}}],"image":"quay.io/coreos/flannel:v0.9.0-amd64","name":"k8s-flannel","securityContext":{"privileged":true},"volumeMounts":[{"mountPath":"/run","name":"run"},{"mountPath":"/etc/k8s-flannel/","name":"flannel-cfg"}]}],"hostNetwork":true,"initContainers":[{"args":["-f","/etc/k8s-flannel/cni-conf.json","/etc/cni/net.d/10-flannel.conf"],"command":["cp"],"image":"quay.io/coreos/flannel:v0.9.0-amd64","name":"install-cni","volumeMounts":[{"mountPath":"/etc/cni/net.d","name":"cni"},{"mountPath":"/etc/k8s-flannel/","name":"flannel-cfg"}]}],"nodeSelector":{"beta.kubernetes.io/arch":"amd64"},"serviceAccountName":"flannel","tolerations":[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master","operator":"Exists"}],"volumes":[{"hostPath":{"path":"/run"},"name":"run"},{"hostPath":{"path":"/etc/cni/net.d"},"name":"cni"},{"configMap":{"name":"k8s-flannel-cfg"},"name":"flannel-cfg"}]}}}}
+  creationTimestamp: 2017-11-08T07:41:32Z
+  generation: 1
+  labels:
+    app: flannel
+    tier: node
+  name: k8s-flannel-ds
+  namespace: kube-system
+  resourceVersion: "344008"
+  selfLink: /apis/extensions/v1beta1/namespaces/kube-system/daemonsets/k8s-flannel-ds
+  uid: 3d783fb5-c458-11e7-a50f-0251174123cb
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: flannel
+      tier: node
+  template:
     metadata:
-      name: fluentd-elasticsearch
-      namespace: my-kube
+      creationTimestamp: null
       labels:
-        k8s-app: fluentd-logging
+        app: flannel
+        tier: node
     spec:
-      selector:
-        matchLabels:
-          name: fluentd-elasticsearch
-      template:
-        metadata:
-          labels:
-            name: fluentd-elasticsearch
-        spec:
-          tolerations:
-          - key: node-role.kubernetes.io/master
-            effect: NoSchedule
-          containers:
-          - name: fluentd-elasticsearch
-            image: gcr.io/google-containers/fluentd-elasticsearch:1.20
-            resources:
-              limits:
-                memory: 200Mi
-              requests:
-                cpu: 100m
-                memory: 200Mi
-            volumeMounts:
-            - name: varlog
-              mountPath: /var/log
-            - name: varlibdockercontainers
-              mountPath: /var/lib/docker/containers
-              readOnly: true
-          terminationGracePeriodSeconds: 30
-          volumes:
-          - name: varlog
-            hostPath:
-              path: /var/log
-          - name: varlibdockercontainers
-            hostPath:
-              path: /var/lib/docker/containers
-
-
-
-
+      containers:
+      - command:
+        - /opt/bin/flanneld
+        - --ip-masq
+        - --kube-subnet-mgr
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: quay.io/coreos/flannel:v0.9.0-amd64
+        imagePullPolicy: IfNotPresent
+        name: k8s-flannel
+        resources: {}
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /run
+          name: run
+        - mountPath: /etc/k8s-flannel/
+          name: flannel-cfg
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      initContainers:
+      - args:
+        - -f
+        - /etc/k8s-flannel/cni-conf.json
+        - /etc/cni/net.d/10-flannel.conf
+        command:
+        - cp
+        image: quay.io/coreos/flannel:v0.9.0-amd64
+        imagePullPolicy: IfNotPresent
+        name: install-cni
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/cni/net.d
+          name: cni
+        - mountPath: /etc/kube-flannel/
+          name: flannel-cfg
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: flannel
+      serviceAccountName: flannel
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - effect: NoSchedule
+        key: node-role.kubernetes.io/master
+        operator: Exists
+      volumes:
+      - hostPath:
+          path: /run
+          type: ""
+        name: run
+      - hostPath:
+          path: /etc/cni/net.d
+          type: ""
+        name: cni
+      - configMap:
+          defaultMode: 420
+          name: k8s-flannel-cfg
+        name: flannel-cfg
+  templateGeneration: 1
+  updateStrategy:
+    type: OnDelete
+status:
+  currentNumberScheduled: 3
+  desiredNumberScheduled: 3
+  numberAvailable: 3
+  numberMisscheduled: 0
+  numberReady: 3
+  observedGeneration: 1
+  updatedNumberScheduled: 3
+```
 
