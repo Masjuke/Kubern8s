@@ -267,4 +267,6 @@ Bravoo... new pod is creating automaticly by daemonsets as we see with age 3minu
 
  New Pod  `k8s-flannel-ds-7cdxq` on `node Member` is created after we deleted Pod  `k8s-flannel-ds-sfpw5`
  
+ This condition will same on replicaset/Deployment or Replication controller when we delete/error/ or an accidental event is happened, POD will automaticly recreated.
+ 
  
