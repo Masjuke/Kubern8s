@@ -36,6 +36,60 @@ Use a Deployment for stateless services, like frontends, where scaling up and do
 
 ### Sample of Daemon Sets
 
+Actually we did already run daemonsets for network plugin for arranging pods communincation since we are install kubernetes on VM. Have a take a look :
+
+
+    $ kubectl get daemonsets -n kube-system
+    NAME              DESIRED   CURRENT   READY     UP-TO-DATE   AVAILABLE   NODE SELECTOR                   AGE
+    kube-flannel-ds   3         3         3         3            3           beta.kubernetes.io/arch=amd64   19d
+    kube-proxy        3         3         3         3            3           <none>                          19d
+
+There's two daemon sets running on kube-system namespace.
+
+Let's have with different namespace which is `my-kube` with fluentd-elasticsearch container, pull from google container. we also limit cpu and memory resources.
+
+    apiVersion: apps/v1beta1 
+    kind: DaemonSet
+    metadata:
+      name: fluentd-elasticsearch
+      namespace: my-kube
+      labels:
+        k8s-app: fluentd-logging
+    spec:
+      selector:
+        matchLabels:
+          name: fluentd-elasticsearch
+      template:
+        metadata:
+          labels:
+            name: fluentd-elasticsearch
+        spec:
+          tolerations:
+          - key: node-role.kubernetes.io/master
+            effect: NoSchedule
+          containers:
+          - name: fluentd-elasticsearch
+            image: gcr.io/google-containers/fluentd-elasticsearch:1.20
+            resources:
+              limits:
+                memory: 200Mi
+              requests:
+                cpu: 100m
+                memory: 200Mi
+            volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+            - name: varlibdockercontainers
+              mountPath: /var/lib/docker/containers
+              readOnly: true
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - name: varlog
+            hostPath:
+              path: /var/log
+          - name: varlibdockercontainers
+            hostPath:
+              path: /var/lib/docker/containers
 
 
 
