@@ -157,5 +157,90 @@ I1128 03:40:09.636191       1 ipmasq.go:85] Adding iptables rule: ! -s 10.144.0.
 
 DaemonSets main job is to keep POD running if there's a error or deleted unexpectedly, POD are recreated by daemon.
 
+`Get all pods from daemonset with label app=flannel`
 
+    $ kubectl get pods -l app=flannel -n kube-system
+    NAME                    READY     STATUS    RESTARTS   AGE
+    k8s-flannel-ds-jq742   1/1       Running   17         19d
+    k8s-flannel-ds-sfpw5   1/1       Running   17         19d
+    k8s-flannel-ds-zxpjj   1/1       Running   17         19d
+
+ Flannel network plugin is running on master and member, member2 and now let's delete in node member
+ 
+```shell
+ $ kubectl describe node member
+Name:               member
+Roles:              <none>
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/hostname=agent
+Annotations:        flannel.alpha.coreos.com/backend-data={"VtepMAC":"f6:8c:c4:f1:c7:60"}
+                    flannel.alpha.coreos.com/backend-type=vxlan
+                    flannel.alpha.coreos.com/kube-subnet-manager=true
+                    flannel.alpha.coreos.com/public-ip=10.0.2.15
+                    node.alpha.kubernetes.io/ttl=0
+                    volumes.kubernetes.io/controller-managed-attach-detach=true
+Taints:             <none>
+CreationTimestamp:  Wed, 08 Nov 2017 07:15:49 +0000
+Conditions:
+  Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+  ----             ------  -----------------                 ------------------                ------                       -------
+  OutOfDisk        False   Tue, 28 Nov 2017 06:31:58 +0000   Wed, 08 Nov 2017 07:15:49 +0000   KubeletHasSufficientDisk     kubelet has sufficient disk space available
+  MemoryPressure   False   Tue, 28 Nov 2017 06:31:58 +0000   Tue, 28 Nov 2017 03:40:36 +0000   KubeletHasSufficientMemory   kubelet has sufficient memory available
+  DiskPressure     False   Tue, 28 Nov 2017 06:31:58 +0000   Tue, 28 Nov 2017 03:40:36 +0000   KubeletHasNoDiskPressure     kubelet has no disk pressure
+  Ready            True    Tue, 28 Nov 2017 06:31:58 +0000   Tue, 28 Nov 2017 03:40:46 +0000   KubeletReady                 kubelet is posting ready status. AppArmor enabled
+Addresses:
+  InternalIP:  192.168.33.20
+  Hostname:    member
+Capacity:
+ cpu:     4
+ memory:  1017716Ki
+ pods:    110
+Allocatable:
+ cpu:     4
+ memory:  915316Ki
+ pods:    110
+System Info:
+ Machine ID:                 f4eea4a7db434e27a5ec71b683d66a9a
+ System UUID:                DC847CB6-7042-47CD-8FB2-EA548DF70D7C
+ Boot ID:                    25ae578a-594c-4ac2-9f23-e3ba7d38fc08
+ Kernel Version:             4.4.0-101-generic
+ OS Image:                   Ubuntu 16.04.3 LTS
+ Operating System:           linux
+ Architecture:               amd64
+ Container Runtime Version:  docker://1.11.2
+ Kubelet Version:            v1.8.2
+ Kube-Proxy Version:         v1.8.2
+PodCIDR:                     10.244.1.0/24
+ExternalID:                  member
+Non-terminated Pods:         (19 in total)
+  Namespace                  Name                                    CPU Requests  CPU Limits  Memory Requests  Memory Limits
+  ---------                  ----                                    ------------  ----------  ---------------  -------------
+  #-kube-system                k8s-flannel-ds-sfpw5                   0 (0%)        0 (0%)      0 (0%)           0 (0%)-#
+    
+  kube-system                kube-proxy-4w2pq                        0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  kube-system                kubernetes-dashboard-747c4f7cf-mdq6r    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  my-kube                    nginx-67f87b9bd4-pmg66                  0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  my-kube                    nginx-web-6768d9d99d-rstrz              0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  my-kube                    nginx-web-kcg74                         0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  my-kube                    nginx-web-kndj2                         0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      kubia-p5gw2                             0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      load-generator-58974b7bf9-2qf79         0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      my-web-588465df4b-hbhhr                 0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      nginx-rc-6wn2t                          0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      nginx-rc-f4q5m                          0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      nginx-tqxv8                             0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      nginx2-768f88c7dc-rftmc                 0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      nginx2-768f88c7dc-tfwpq                 0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      nginx3-67ff667c55-m2t4g                 0 (0%)        0 (0%)      0 (0%)           0 (0%)
+  trial                      php-apache-6b749bb748-f85mk             200m (5%)     0 (0%)      0 (0%)           0 (0%)
+  trial                      php-apache-6b749bb748-vqtdn             200m (5%)     0 (0%)      0 (0%)           0 (0%)
+  trial                      web-76d6f8887-lwm2r                     0 (0%)        0 (0%)      0 (0%)           0 (0%)
+Allocated resources:
+  (Total limits may be over 100 percent, i.e., overcommitted.)
+  CPU Requests  CPU Limits  Memory Requests  Memory Limits
+  ------------  ----------  ---------------  -------------
+  400m (10%)    0 (0%)      0 (0%)           0 (0%)
+Events:         <none>
+```
 
