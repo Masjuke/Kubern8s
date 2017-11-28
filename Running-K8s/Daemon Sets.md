@@ -123,46 +123,35 @@ spec:
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /etc/cni/net.d
-          name: cni
-        - mountPath: /etc/kube-flannel/
-          name: flannel-cfg
-      nodeSelector:
-        beta.kubernetes.io/arch: amd64
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      serviceAccount: flannel
-      serviceAccountName: flannel
-      terminationGracePeriodSeconds: 30
-      tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/master
-        operator: Exists
-      volumes:
-      - hostPath:
-          path: /run
-          type: ""
-        name: run
-      - hostPath:
-          path: /etc/cni/net.d
-          type: ""
-        name: cni
-      - configMap:
-          defaultMode: 420
-          name: k8s-flannel-cfg
-        name: flannel-cfg
-  templateGeneration: 1
-  updateStrategy:
-    type: OnDelete
-status:
-  currentNumberScheduled: 3
-  desiredNumberScheduled: 3
-  numberAvailable: 3
-  numberMisscheduled: 0
-  numberReady: 3
-  observedGeneration: 1
-  updatedNumberScheduled: 3
+        *****
 ```
+
+Logs DaemonSets from kube-dashboard :
+
+```shell
+I1128 03:40:08.516366       1 main.go:470] Determining IP address of default interface
+I1128 03:40:08.518166       1 main.go:483] Using interface with name enp0s3 and address 10.0.2.15
+I1128 03:40:08.518188       1 main.go:500] Defaulting external address to interface address (10.0.2.15)
+I1128 03:40:08.539037       1 kube.go:130] Waiting 10m0s for node controller to sync
+I1128 03:40:08.539086       1 kube.go:283] Starting kube subnet manager
+I1128 03:40:09.543122       1 kube.go:137] Node controller sync successful
+I1128 03:40:09.543151       1 main.go:235] Created subnet manager: Kubernetes Subnet Manager - master
+I1128 03:40:09.543156       1 main.go:238] Installing signal handlers
+I1128 03:40:09.543475       1 main.go:348] Found network config - Backend type: vxlan
+I1128 03:40:09.543629       1 vxlan.go:119] VXLAN config: VNI=1 Port=0 GBP=false DirectRouting=false
+I1128 03:40:09.594185       1 main.go:295] Wrote subnet file to /run/flannel/subnet.env
+I1128 03:40:09.594199       1 main.go:299] Running backend.
+I1128 03:40:09.594207       1 main.go:317] Waiting for all goroutines to exit
+I1128 03:40:09.594230       1 vxlan_network.go:56] watching for new subnet leases
+I1128 03:40:09.614303       1 ipmasq.go:75] Some iptables rules are missing; deleting and recreating rules
+I1128 03:40:09.614339       1 ipmasq.go:97] Deleting iptables rule: -s 10.144.0.0/16 -d 10.144.0.0/16 -j RETURN
+I1128 03:40:09.616201       1 ipmasq.go:97] Deleting iptables rule: -s 10.144.0.0/16 ! -d 224.0.0.0/4 -j MASQUERADE
+I1128 03:40:09.617466       1 ipmasq.go:97] Deleting iptables rule: ! -s 10.144.0.0/16 -d 10.144.0.0/24 -j RETURN
+I1128 03:40:09.619469       1 ipmasq.go:97] Deleting iptables rule: ! -s 10.144.0.0/16 -d 10.144.0.0/16 -j MASQUERADE
+I1128 03:40:09.621624       1 ipmasq.go:85] Adding iptables rule: -s 10.144.0.0/16 -d 10.144.0.0/16 -j RETURN
+I1128 03:40:09.624133       1 ipmasq.go:85] Adding iptables rule: -s 10.144.0.0/16 ! -d 224.0.0.0/4 -j MASQUERADE
+I1128 03:40:09.626660       1 ipmasq.go:85] Adding iptables rule: ! -s 10.144.0.0/16 -d 10.144.0.0/24 -j RETURN
+I1128 03:40:09.636191       1 ipmasq.go:85] Adding iptables rule: ! -s 10.144.0.0/16 -d 10.144.0.0/16 -j MASQUERADE
+```
+
 
