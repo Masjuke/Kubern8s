@@ -67,7 +67,9 @@ NAME        REFERENCE              TARGETS           MINPODS   MAXPODS   REPLICA
 nginx-web   Deployment/nginx-web   <unknown> / 80%   4         5         2          1m
 ```
 
+ngin-web HPA is reacted with new .yaml file we just update. as we see that previously nginx-web has `MINPODS:2` now become 4
 
+Let's test if it's working, continue in different .md file
 
 
 
