@@ -43,7 +43,7 @@ it will produce .yaml file
           selfLink: /apis/autoscaling/v1/namespaces/my-kube/horizontalpodautoscalers/nginx-web
           uid: 1c765779-d431-11e7-9e20-0251174123cb
         spec:
-          maxReplicas: 5
+          maxReplicas: 10
           minReplicas: 4
           scaleTargetRef:
             apiVersion: extensions/v1beta1
@@ -54,7 +54,7 @@ it will produce .yaml file
           currentReplicas: 0
           desiredReplicas: 0
 
-`$ sudo nano nginx-hpa.yaml` # Edit minReplicas to 4
+`$ sudo nano nginx-hpa.yaml` # Edit minReplicas to 4 and max to: 10
 
 Update existing HPA nginx-web from minpods: 2 to minpods: 4 with this command
 
@@ -64,10 +64,10 @@ Update existing HPA nginx-web from minpods: 2 to minpods: 4 with this command
 ```shell
 kubectl get hpa -n my-kube
 NAME        REFERENCE              TARGETS           MINPODS   MAXPODS   REPLICAS   AGE
-nginx-web   Deployment/nginx-web   <unknown> / 80%   4         5         2          1m
+nginx-web   Deployment/nginx-web   <unknown> / 80%   4         10         2          1m
 ```
 
-ngin-web HPA is reacted with new .yaml file we just update. as we see that previously nginx-web has `MINPODS:2` now become 4
+ngin-web HPA is reacted with new .yaml file we just update. as we see that previously nginx-web has `MINPODS:2` now become 4 and maximum is 10 if limit resoure is reachable.
 
 Let's test if it's working, continue in different .md file
 
